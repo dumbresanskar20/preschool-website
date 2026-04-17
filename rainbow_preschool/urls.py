@@ -14,7 +14,15 @@ urlpatterns = [
     path('contact/', include('contact.urls')),
     path('accounts/', include('accounts.urls')),
     path('gallery/', include('gallery.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+# Ensure media files (user uploads) are served even when DEBUG = False for Render
+from django.urls import re_path
+from django.views.static import serve
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # Custom admin site header
 admin.site.site_header = "🌈 Rainbow & Bunnyland Preschool Admin"
