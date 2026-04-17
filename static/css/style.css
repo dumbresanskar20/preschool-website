@@ -800,6 +800,67 @@ img {
     color: var(--clr-text-light);
 }
 
+/* ==========================================================================
+   School Brand Component
+   ========================================================================== */
+.school-brand-component {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    animation: slideDownFade 0.8s ease-out forwards;
+}
+
+@keyframes slideDownFade {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.school-brand-component h1,
+.school-brand-component h2 {
+    margin: 0;
+    line-height: 1.1;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.school-brand-component:hover h1,
+.school-brand-component:hover h2 {
+    transform: translateY(-3px) scale(1.02);
+}
+
+.rainbow-brand {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(45deg, #FF5E89, #9D4EDD, #00C6FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.bunny-brand {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #FF8FAD;
+}
+
+/* Specific context adjustments */
+.navbar .school-brand-component .rainbow-brand { font-size: 1.5rem; }
+.navbar .school-brand-component .bunny-brand { font-size: 1rem; }
+
+.footer-col .school-brand-component .rainbow-brand { font-size: 1.8rem; }
+.footer-col .school-brand-component .bunny-brand { font-size: 1.2rem; margin-bottom: 15px;}
+
+.hero-content .school-brand-component { align-items: center; margin-bottom: 25px; }
+.hero-content .school-brand-component .rainbow-brand { font-size: 3.5rem; }
+.hero-content .school-brand-component .bunny-brand { font-size: 2rem; }
+
+@media (max-width: 768px) {
+    .hero-content .school-brand-component .rainbow-brand { font-size: 2.5rem; }
+    .hero-content .school-brand-component .bunny-brand { font-size: 1.5rem; }
+    .navbar .school-brand-component .rainbow-brand { font-size: 1.2rem; }
+    .navbar .school-brand-component .bunny-brand { font-size: 0.9rem; }
+}
+
 .data-table tr:hover { background-color: #F8FAFC;}
 
 .badge {

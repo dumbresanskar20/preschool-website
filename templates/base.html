@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page_title }} | Rainbow & Bunnyland Preschool</title>
+    <title>{{ page_title }} | Rainbow Preschool & Bunnyland Preschool</title>
     <!-- Use Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome for icons -->
@@ -15,12 +15,8 @@
     <!-- Navbar -->
     <header class="navbar">
         <div class="container nav-container">
-            <a href="{% url 'core:home' %}" class="logo">
-                <span class="logo-icon">🌈</span>
-                <div class="logo-text">
-                    <h1>Rainbow & Bunnyland</h1>
-                    <p>Preschool</p>
-                </div>
+            <a href="{% url 'core:home' %}" class="logo" style="text-decoration: none;">
+                {% include 'components/brand.html' %}
             </a>
             
             <button class="menu-toggle" id="mobile-menu-btn">
@@ -68,7 +64,7 @@
         <div class="cloud-divider cloud-top"></div>
         <div class="container footer-container">
             <div class="footer-col brand-col">
-                <h2>🌈 Rainbow & Bunnyland</h2>
+                {% include 'components/brand.html' %}
                 <p>Nurturing little minds in a world of wonder and playful learning.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook"></i></a>
@@ -95,7 +91,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; {% now "Y" %} Rainbow & Bunnyland Preschool. All rights reserved.</p>
+            <p>&copy; {% now "Y" %} Rainbow Preschool & Bunnyland Preschool. All rights reserved.</p>
         </div>
     </footer>
 
