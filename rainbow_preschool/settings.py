@@ -13,8 +13,8 @@ SECRET_KEY = 'django-insecure-rainbow-bunnyland-preschool-secret-key-2024-change
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
-CSRF_TRUSTED_ORIGINS = []
+ALLOWED_HOSTS = ['preschool-website-nrjr.onrender.com', 'localhost', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://preschool-website-nrjr.onrender.com']
 
 # Application definition
 INSTALLED_APPS = [
