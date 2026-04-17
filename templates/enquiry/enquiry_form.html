@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section-padding" style="background: linear-gradient(135deg, #FFF3E0 0%, #FFCC80 100%);">
+    <div class="container">
+        <div class="form-container fade-in" style="border-top-color: var(--clr-accent);">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="font-size: 2.5rem;">Enroll Your Child 🎒</h2>
+                <p style="color: var(--clr-text-light);">We are so excited to welcome you to our family!</p>
+            </div>
+            
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="grid-2" style="gap: 20px;">
+                    <div class="form-group">
+                        <label for="{{ form.parent_name.id_for_label }}">Parent Name</label>
+                        {{ form.parent_name }}
+                        {% if form.parent_name.errors %}
+                            <ul class="errorlist">{{ form.parent_name.errors }}</ul>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.child_name.id_for_label }}">Child Name</label>
+                        {{ form.child_name }}
+                        {% if form.child_name.errors %}
+                            <ul class="errorlist">{{ form.child_name.errors }}</ul>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="grid-2" style="gap: 20px;">
+                    <div class="form-group">
+                        <label for="{{ form.child_age.id_for_label }}">Child Age (Years)</label>
+                        {{ form.child_age }}
+                        {% if form.child_age.errors %}
+                            <ul class="errorlist">{{ form.child_age.errors }}</ul>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+                        {{ form.phone }}
+                        {% if form.phone.errors %}
+                            <ul class="errorlist">{{ form.phone.errors }}</ul>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">Email Address</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <ul class="errorlist">{{ form.email.errors }}</ul>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.message.id_for_label }}">Additional Message / Querey</label>
+                    {{ form.message }}
+                    {% if form.message.errors %}
+                        <ul class="errorlist">{{ form.message.errors }}</ul>
+                    {% endif %}
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Submit Enquiry</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section-padding" style="background: linear-gradient(135deg, #F3E8FB 0%, #D8BFD8 100%); text-align: center; padding-top: 60px; padding-bottom: 60px;">
+    <div class="container">
+        <h1 class="hero-title">Photo <span class="text-gradient">Gallery</span> 📸</h1>
+        <p class="section-subtitle">A sneak peek into the joyful moments at our preschool.</p>
+        
+        <!-- Category Filters -->
+        <div style="margin-top: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <a href="{% url 'gallery:main' %}" class="btn {% if not current_category %}btn-primary{% else %}btn-secondary{% endif %}" style="padding: 8px 20px; font-size: 1rem;">All</a>
+            <a href="{% url 'gallery:main' %}?category=A" class="btn {% if current_category == 'A' %}btn-primary{% else %}btn-secondary{% endif %}" style="padding: 8px 20px; font-size: 1rem;">Activities</a>
+            <a href="{% url 'gallery:main' %}?category=E" class="btn {% if current_category == 'E' %}btn-primary{% else %}btn-secondary{% endif %}" style="padding: 8px 20px; font-size: 1rem;">Events</a>
+            <a href="{% url 'gallery:main' %}?category=C" class="btn {% if current_category == 'C' %}btn-primary{% else %}btn-secondary{% endif %}" style="padding: 8px 20px; font-size: 1rem;">Classroom</a>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding" style="background-color: white;">
+    <div class="container">
+        <div class="gallery-grid">
+            {% for img in images %}
+            <div class="gallery-item fade-in" style="animation-delay: {{ forloop.counter|default:1 }}00ms;">
+                <img src="{{ img.image.url }}" alt="{{ img.title }}" class="gallery-img">
+                <div class="gallery-overlay">
+                    <span class="badge" style="background-color: var(--clr-accent); color: var(--clr-text-main); align-self: flex-start; margin-bottom: 10px;">{{ img.get_category_display }}</span>
+                    <h4 style="margin-bottom: 5px;">{{ img.title }}</h4>
+                    {% if img.description %}<p style="font-size: 0.9rem; margin: 0;">{{ img.description|truncatewords:15 }}</p>{% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <div style="grid-column: 1/-1; text-align: center; color: var(--clr-text-light); padding: 50px 0;">
+                <div style="font-size: 4rem; margin-bottom: 20px;">🖼️</div>
+                <h3>No Images Yet</h3>
+                <p>Check back later for beautiful moments!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

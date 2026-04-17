@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+    <div class="cloud-bg">☁️</div>
+    <div class="cloud-bg c2">☁️</div>
+    
+    <div class="container hero-content">
+        <h1 class="hero-title">Welcome to <span class="text-gradient">Rainbow & Bunnyland</span> Preschool 🌈🐰</h1>
+        <p>A magical place where little minds grow, play, and discover the world around them in a safe and loving environment.</p>
+        
+        <div class="hero-buttons">
+            <a href="{% url 'enquiry:submit' %}" class="btn btn-primary btn-large pulse-btn">Enroll Now 🎒</a>
+            <a href="{% url 'core:activities' %}" class="btn btn-secondary btn-large">Our Programs 🎨</a>
+        </div>
+    </div>
+    
+    <div class="cloud-divider bottom"></div>
+</section>
+
+<!-- Quick Stats / Features Section -->
+<section class="section-padding" style="background-color: white;">
+    <div class="container">
+        <div class="grid-3">
+            <div class="card activity-card">
+                <div class="activity-icon">❤️</div>
+                <h3>Safe & Loving</h3>
+                <p>A nurturing environment that feels just like home for your little ones.</p>
+            </div>
+            <div class="card activity-card">
+                <div class="activity-icon">🧩</div>
+                <h3>Play-based Learning</h3>
+                <p>Curriculums designed to encourage natural curiosity and cognitive growth.</p>
+            </div>
+            <div class="card activity-card">
+                <div class="activity-icon">👩‍🏫</div>
+                <h3>Expert Teachers</h3>
+                <p>Certified educators dedicated to early childhood development.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Preview -->
+<section class="section-padding" style="background-color: var(--clr-bg-main);">
+    <div class="container">
+        <div class="grid-2">
+            <div class="fade-in">
+                <h2 class="section-title" style="text-align: left;">Where Every Child <br><span class="text-gradient">Shines Brightly</span> ✨</h2>
+                <p style="font-size: 1.1rem; color: var(--clr-text-light); margin-bottom: 20px;">
+                    At Rainbow & Bunnyland Preschool, we believe that the early years are the most critical in a child's development. Our holistic approach ensures that each child develops physically, emotionally, socially, and intellectually.
+                </p>
+                <ul style="list-style: none; margin-bottom: 30px;">
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--clr-success); margin-right: 10px;"></i> Age-appropriate curriculums (1-5 years)</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--clr-success); margin-right: 10px;"></i> Nutritious meals & snacks</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--clr-success); margin-right: 10px;"></i> Spacious indoor and outdoor play areas</li>
+                </ul>
+                <a href="{% url 'core:about' %}" class="btn btn-primary">Learn More About Us</a>
+            </div>
+            <div class="fade-in" style="position: relative;">
+                <!-- Placeholder for kids image -->
+                <div style="background: var(--clr-accent-light); border-radius: var(--radius-large); padding: 20px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; font-size: 5rem; border-radius: var(--radius-blob); box-shadow: var(--shadow-lg);">
+                    🧒🏽🧸👧🏼
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Recent Gallery Preview -->
+{% if gallery_images %}
+<section class="section-padding" style="background-color: white;">
+    <div class="container">
+        <h2 class="section-title">Happy <span class="text-gradient">Moments</span> 📸</h2>
+        <p class="section-subtitle">A glimpse into our daily fun activities.</p>
+        
+        <div class="gallery-grid">
+            {% for img in gallery_images %}
+            <div class="gallery-item fade-in" style="animation-delay: {{ forloop.counter|default:1 }}00ms;">
+                <img src="{{ img.image.url }}" alt="{{ img.title }}" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h4>{{ img.title }}</h4>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="{% url 'gallery:main' %}" class="btn btn-secondary">View Full Gallery</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Testimonials / Reviews -->
+<section class="section-padding" style="background: linear-gradient(135deg, #FDF9F1 0%, #FFE399 100%);">
+    <div class="container">
+        <h2 class="section-title">What Parents <span class="text-gradient">Say</span> 💬</h2>
+        <p class="section-subtitle">Real experiences from our loving community.</p>
+        
+        <div class="grid-3">
+            {% for review in reviews %}
+            <div class="review-card fade-in" style="animation-delay: {{ forloop.counter|default:1 }}00ms;">
+                <div class="stars">
+                    {% for i in review.star_range %}<span>⭐</span>{% endfor %}
+                </div>
+                <p class="review-content">"{{ review.review_message|truncatewords:25 }}"</p>
+                <div class="reviewer-meta">
+                    <div class="reviewer-avatar">{{ review.parent_name|make_list|first|upper }}</div>
+                    <div>
+                        <strong style="display: block;">{{ review.parent_name }}</strong>
+                        <span style="font-size: 0.85rem; color: var(--clr-text-light);">Parent of {{ review.child_name }}</span>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div style="grid-column: 1/-1; text-align: center; color: var(--clr-text-light);">
+                <p>No reviews yet. Be the first to review us!</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div style="text-align: center; margin-top: 50px; display: flex; justify-content: center; gap: 20px;">
+            <a href="{% url 'reviews:list' %}" class="btn btn-secondary">Read All Reviews</a>
+            <a href="{% url 'reviews:submit' %}" class="btn btn-accent">Leave a Review</a>
+        </div>
+    </div>
+</section>
+
+<!-- Call to action -->
+<section class="section-padding" style="background-color: var(--clr-primary); color: white; text-align: center; position: relative; overflow: hidden;">
+    <div class="container" style="position: relative; z-index: 2;">
+        <h2 style="font-size: 3rem; margin-bottom: 20px; color: white;">Ready to Join the Fun? 🎉</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9;">Enrollment for the current academic year is open!</p>
+        <a href="{% url 'enquiry:submit' %}" class="btn btn-accent btn-large" style="background: white; color: var(--clr-primary);">Book a Visit Today</a>
+    </div>
+</section>
+
+{% endblock %}

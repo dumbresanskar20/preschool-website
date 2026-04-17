@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section-padding" style="background: linear-gradient(135deg, #FFF9E6 0%, #FFE399 100%); text-align: center; padding-top: 60px; padding-bottom: 60px;">
+    <div class="container">
+        <h1 class="hero-title">Parent <span class="text-gradient">Reviews</span> 💬</h1>
+        <p class="section-subtitle">Real experiences and feedback from our loving community of parents.</p>
+        <a href="{% url 'reviews:submit' %}" class="btn btn-primary pulse-btn">Write a Review</a>
+    </div>
+</section>
+
+<section class="section-padding" style="background-color: var(--clr-bg-main);">
+    <div class="container">
+        <div class="grid-3">
+            {% for review in reviews %}
+            <div class="review-card fade-in" style="animation-delay: {{ forloop.counter|default:1 }}00ms;">
+                <div class="stars">
+                    {% for i in review.star_range %}<span>⭐</span>{% endfor %}
+                </div>
+                <p class="review-content">"{{ review.review_message }}"</p>
+                <div class="reviewer-meta">
+                    <div class="reviewer-avatar">{{ review.parent_name|make_list|first|upper }}</div>
+                    <div>
+                        <strong style="display: block;">{{ review.parent_name }}</strong>
+                        <span style="font-size: 0.85rem; color: var(--clr-text-light);">Parent of {{ review.child_name }}</span><br>
+                        <span style="font-size: 0.75rem; color: #9CA3AF;">{{ review.created_at|date:"F Y" }}</span>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div style="grid-column: 1/-1; text-align: center; color: var(--clr-text-light); padding: 50px 0;">
+                <div style="font-size: 4rem; margin-bottom: 20px;">🤷‍♀️</div>
+                <h3>No Reviews Yet</h3>
+                <p>Be the first to share your experience with us!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

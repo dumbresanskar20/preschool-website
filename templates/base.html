@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }} | Rainbow & Bunnyland Preschool</title>
+    <!-- Use Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="{% url 'core:home' %}" class="logo">
+                <span class="logo-icon">🌈</span>
+                <div class="logo-text">
+                    <h1>Rainbow & Bunnyland</h1>
+                    <p>Preschool</p>
+                </div>
+            </a>
+            
+            <button class="menu-toggle" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="nav-links" id="nav-links">
+                <a href="{% url 'core:home' %}">Home</a>
+                <a href="{% url 'core:about' %}">About Us</a>
+                <a href="{% url 'core:activities' %}">Activities</a>
+                <a href="{% url 'gallery:main' %}">Gallery</a>
+                <a href="{% url 'reviews:list' %}">Reviews</a>
+                <a href="{% url 'contact:page' %}">Contact</a>
+                
+                {% if request.user.is_authenticated and request.user.is_staff %}
+                    <a href="{% url 'accounts:dashboard' %}" class="btn-nav-primary">Dashboard</a>
+                    <a href="{% url 'accounts:logout' %}" class="btn-nav-secondary">Logout</a>
+                {% else %}
+                    <a href="{% url 'enquiry:submit' %}" class="btn-nav-primary pulse-btn">Enroll Now 🐰</a>
+                    <a href="{% url 'accounts:login' %}" class="btn-nav-secondary" style="margin-left: 10px;"><i class="fas fa-lock" style="font-size: 0.8rem;"></i> Staff Login</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <!-- Messages / Alerts -->
+    {% if messages %}
+    <div class="messages-container container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+                <button class="close-alert">&times;</button>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content Area -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="cloud-divider cloud-top"></div>
+        <div class="container footer-container">
+            <div class="footer-col brand-col">
+                <h2>🌈 Rainbow & Bunnyland</h2>
+                <p>Nurturing little minds in a world of wonder and playful learning.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col links-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{% url 'core:about' %}">About Us</a></li>
+                    <li><a href="{% url 'core:activities' %}">Programs</a></li>
+                    <li><a href="{% url 'gallery:main' %}">Photo Gallery</a></li>
+                    <li><a href="{% url 'reviews:list' %}">Parent Reviews</a></li>
+                </ul>
+            </div>
+            <div class="footer-col contact-col">
+                <h3>Get in Touch</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Magic Cloud Lane, Dream City, DC 12345</li>
+                    <li><i class="fas fa-phone-alt"></i> (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> hello@rainbowbunnyland.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; {% now "Y" %} Rainbow & Bunnyland Preschool. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Scripts -->
+    <script src="/static/js/main.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

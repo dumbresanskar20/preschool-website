@@ -1,0 +1,20 @@
+Migrations for 'contact':
+  contact\migrations\0001_initial.py
+    - Create model ContactMessage
+Migrations for 'enquiry':
+  enquiry\migrations\0001_initial.py
+    - Create model Enquiry
+Migrations for 'gallery':
+  gallery\migrations\0001_initial.py
+    - Create model GalleryImage
+Migrations for 'reviews':
+  reviews\migrations\0001_initial.py
+    - Create model Review
+Operations to perform:
+  Apply all migrations: admin, auth, contact, contenttypes, enquiry, gallery, reviews, sessions
+Running migrations:
+  Applying contact.0001_initial... OK
+  Applying enquiry.0001_initial... OK
+  Applying gallery.0001_initial... OK
+  Applying reviews.0001_initial... OK
+Done 

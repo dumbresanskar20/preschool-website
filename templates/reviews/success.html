@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section-padding" style="background-color: var(--clr-bg-main); text-align: center; min-height: 60vh; display: flex; align-items: center;">
+    <div class="container fade-in">
+        <div style="font-size: 5rem; margin-bottom: 20px;">⭐💖</div>
+        <h1 class="hero-title">Review Submitted!</h1>
+        <p style="font-size: 1.2rem; color: var(--clr-text-light); max-width: 600px; margin: 0 auto 30px;">
+            Thank you for taking the time to share your experience! Your review will be visible on our website once approved by an admin.
+        </p>
+        <a href="{% url 'reviews:list' %}" class="btn btn-secondary">Back to Reviews</a>
+    </div>
+</section>
+{% endblock %}

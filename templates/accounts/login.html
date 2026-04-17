@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section-padding" style="background: linear-gradient(135deg, #1E293B 0%, #334155 100%); min-height: calc(100vh - 80px); display: flex; align-items: center;">
+    <div class="container">
+        <div class="form-container fade-in" style="max-width: 450px; border-top-color: var(--clr-primary);">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="font-size: 2rem;">Staff Login 🔐</h2>
+                <p style="color: var(--clr-text-light);">Access the admin portal</p>
+            </div>
+            
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="id_username">Username</label>
+                    <input type="text" name="username" id="id_username" class="form-control" placeholder="Enter your username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_password">Password</label>
+                    <input type="password" name="password" id="id_password" class="form-control" placeholder="Enter your password" required>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login 🔑</button>
+                </div>
+            </form>
+            
+            <div style="text-align: center; margin-top: 20px; border-top: 1px solid #E2E8F0; padding-top: 20px;">
+                <a href="{% url 'core:home' %}" style="color: var(--clr-text-light); text-decoration: underline; font-size: 0.9rem;">Wait, I'm a parent (Return Home)</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
