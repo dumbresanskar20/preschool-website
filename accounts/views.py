@@ -24,13 +24,11 @@ def user_login(request):
             user = form.get_user()
             if is_staff_member(user):
                 auth_login(request, user)
-                messages.success(request, f"Welcome back, {user.username}!")
-                return redirect('accounts:dashboard')
+                return JsonResponse({'success': True, 'redirect_url': '/accounts/dashboard/'})
             else:
-                messages.error(request, "Only staff members can access the dashboard. Redirecting to home.")
-                return redirect('core:home')
+                return JsonResponse({'success': False, 'message': "Only staff members can access the dashboard."})
         else:
-            messages.error(request, "Invalid username or password.")
+            return JsonResponse({'success': False, 'message': "Invalid username or password."})
     else:
         form = AuthenticationForm()
         
