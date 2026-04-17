@@ -15,7 +15,11 @@ def is_staff_member(user):
     return user.is_staff or user.is_superuser
 
 def user_login(request):
+    is_ajax = request.headers.get('x-requested-with') == 'XMLHttpRequest'
+    
     if request.user.is_authenticated and is_staff_member(request.user):
+        if is_ajax:
+            return JsonResponse({'success': True, 'redirect_url': '/accounts/dashboard/'})
         return redirect('accounts:dashboard')
         
     if request.method == 'POST':
@@ -24,12 +28,18 @@ def user_login(request):
             user = form.get_user()
             if is_staff_member(user):
                 auth_login(request, user)
+                if is_ajax:
+                    return JsonResponse({'success': True, 'redirect_url': '/accounts/dashboard/'})
                 messages.success(request, f"Welcome back, {user.username}!")
                 return redirect('accounts:dashboard')
             else:
+                if is_ajax:
+                    return JsonResponse({'success': False, 'error': "Only staff members can access the dashboard."})
                 messages.error(request, "Only staff members can access the dashboard. Redirecting to home.")
                 return redirect('core:home')
         else:
+            if is_ajax:
+                return JsonResponse({'success': False, 'error': "Invalid username or password!"})
             messages.error(request, "Invalid username or password.")
     else:
         form = AuthenticationForm()
